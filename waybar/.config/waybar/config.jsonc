@@ -1,0 +1,74 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 28,
+  "spacing": 1,
+
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "memory",
+    "battery",
+    "network",
+    "pulseaudio",
+    "pulseaudio/slider",
+    "bluetooth"
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "persistent-workspaces": { "*": 5}
+  },
+
+  "clock": {
+    "format": " {:%H:%M}",
+    "format-alt": " {:%A, %B %d, %Y (%R)}",
+
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3
+    }
+  },
+
+  "memory": {
+    "format": "󰍛 {}%"
+  },
+
+  "network": {
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰖪"
+  },
+
+  "bluetooth": {
+    "format": "",
+    "on-click": "blueman-manager"
+  },
+
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+   },
+
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": " ",
+    "scroll-step": 5,
+    "on-click": "pavucontrol"
+  },
+
+  "battery": {
+    "format": "{capacity}% ",
+    "format-charging": " {capacity}%"
+  }
+}

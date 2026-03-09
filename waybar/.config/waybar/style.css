@@ -1,0 +1,87 @@
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 12px;
+  border: none;
+  min-height: 0;
+  margin: 0px 2px
+}
+
+window#waybar {
+  background: transparent;
+}
+
+/* floating glass modules */
+#workspaces,
+#clock,
+#memory,
+#network,
+#bluetooth,
+#pulseaudio,
+#battery {
+  margin: 1px;
+  padding: 4px 10px;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+#pulseaudio-slider {
+  margin: 1px;
+  padding: 4px 10px;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* hide the draggable knob */
+#pulseaudio-slider slider {
+  min-height: 0;
+  min-width: 0;
+  opacity: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* slider track */
+#pulseaudio-slider trough {
+  min-height: 6px;
+  min-width: 80px;
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.15);
+}
+
+/* filled part */
+#pulseaudio-slider highlight {
+  min-height: 6px;
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.6);
+}
+
+
+/* workspace buttons */
+#workspaces button {
+  padding: 0 6px;
+  margin: 0 2px;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255,255,255,0.25);
+}
+
+#workspaces button:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+#workspaces button.active {
+  background: rgba(255,255,255,0.35);
+  color: black;
+  padding: 0 20px
+  
+}
+
