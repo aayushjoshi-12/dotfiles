@@ -71,7 +71,7 @@ window#waybar {
   margin: 0 2px;
   border-radius: 10px;
   background: transparent;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.40);
 }
 
 #workspaces button:hover {
