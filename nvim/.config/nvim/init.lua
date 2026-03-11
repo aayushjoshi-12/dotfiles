@@ -24,4 +24,5 @@ require("lazy").setup({
 	require("plugins.bufferline"),
 	require("plugins.neotree"),
 	require("plugins.misc"),
+	require("plugins.alpha"),
 })
