@@ -6,7 +6,7 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family     JetBrainsMonoNerdFontPropo 
+font_family     JetBrainsMono Nerd Font Mono 
 # bold_font        auto
 # italic_font      auto
 # bold_italic_font auto
@@ -1116,7 +1116,7 @@ font_size 9.0
 #: set the vertical and horizontal sides. Three values set top,
 #: horizontal and bottom. Four values set top, right, bottom and left.
 
-# window_padding_width 0
+window_padding_width 4
 
 #: The window padding (in pts) (blank area between the text and the
 #: window border). A single value sets all four sides. Two values set
@@ -1462,7 +1462,7 @@ font_size 9.0
 
 #: The foreground and background colors.
 
-# background_opacity 1.0
+background_opacity 0.7
 
 #: The opacity of the terminal background color. A number between zero
 #: and one, where one is opaque and zero is fully transparent. This
@@ -1492,7 +1492,7 @@ font_size 9.0
 #: will only work if dynamic_background_opacity was enabled in the
 #: original config.
 
-# background_blur 0
+#: background_blur 10
 
 #: Set to a positive value to enable background blur (blurring of the
 #: visuals behind a transparent window) on platforms that support it.
@@ -2032,7 +2032,7 @@ font_size 9.0
 #:     # Do not clear previous notification when next command finishes or window regains focus
 #:     notify_on_cmd_finish invisible 5.0 notify
 
-# term xterm-kitty
+term xterm-256color
 
 #: The value of the TERM environment variable to set. Changing this
 #: can break many terminal programs, only change it if you know what
@@ -2990,3 +2990,9 @@ font_size 9.0
 #: }}}
 
 #: }}}
+
+
+# BEGIN_KITTY_THEME
+# Catppuccin Kitty Mocha
+include current-theme.conf
+# END_KITTY_THEME

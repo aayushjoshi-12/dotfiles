@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-  background: transparent;
+  background:transparent;
 }
 
 /* floating glass modules */
@@ -17,23 +17,14 @@ window#waybar {
 #network,
 #bluetooth,
 #pulseaudio,
+#pulseaudio-slider,
 #battery {
   margin: 1px;
   padding: 4px 10px;
 
   border-radius: 14px;
 
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.12);
-}
-
-#pulseaudio-slider {
-  margin: 1px;
-  padding: 4px 10px;
-
-  border-radius: 14px;
-
-  background: rgba(255,255,255,0.15);
+  background: rgba(30,30,30,0.75);
   border: 1px solid rgba(255,255,255,0.12);
 }
 
@@ -67,7 +58,7 @@ window#waybar {
 
 /* workspace buttons */
 #workspaces button {
-  padding: 0 6px;
+  padding: 0 2px;
   margin: 0 2px;
   border-radius: 10px;
   background: transparent;
@@ -81,7 +72,7 @@ window#waybar {
 #workspaces button.active {
   background: rgba(255,255,255,0.35);
   color: black;
-  padding: 0 20px
+  padding: 0 25px
   
 }
 
