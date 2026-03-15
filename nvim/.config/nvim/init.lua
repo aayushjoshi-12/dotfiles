@@ -25,4 +25,5 @@ require("lazy").setup({
 	require("plugins.neotree"),
 	require("plugins.misc"),
 	require("plugins.alpha"),
+	require("plugins.render-markdown"),
 })

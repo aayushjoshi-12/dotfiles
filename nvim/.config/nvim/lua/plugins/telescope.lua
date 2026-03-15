@@ -46,14 +46,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			callback = function(event)
 				local buf = event.buf
 
-				vim.keymap.set("n", "grr", builtin.lsp_references, { buffer = buf, desc = "[G]oto [R]eferences" })
+				vim.keymap.set("n", "gr", builtin.lsp_references, { buffer = buf, desc = "[G]oto [R]eferences" })
 				vim.keymap.set(
 					"n",
 					"gri",
 					builtin.lsp_implementations,
 					{ buffer = buf, desc = "[G]oto [I]mplementation" }
 				)
-				vim.keymap.set("n", "grd", builtin.lsp_definitions, { buffer = buf, desc = "[G]oto [D]efinition" })
+				vim.keymap.set("n", "gd", builtin.lsp_definitions, { buffer = buf, desc = "[G]oto [D]efinition" })
 				vim.keymap.set(
 					"n",
 					"gO",
@@ -68,7 +68,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				)
 				vim.keymap.set(
 					"n",
-					"grt",
+					"gt",
 					builtin.lsp_type_definitions,
 					{ buffer = buf, desc = "[G]oto [T]ype Definition" }
 				)

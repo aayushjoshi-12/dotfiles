@@ -23,9 +23,9 @@ return {
 					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 				end
 
-				map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
-				map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
-				map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+				map("gR", vim.lsp.buf.rename, "[R]e[n]ame")
+				map("ga", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
+				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client:supports_method("textDocument/documentHighlight", event.buf) then
