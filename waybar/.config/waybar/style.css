@@ -47,7 +47,7 @@ window#waybar {
   background: rgba(255,255,255,0.15);
 }
 
-/* filled part */
+/* slider filled part */
 #pulseaudio-slider highlight {
   min-height: 6px;
   border-radius: 10px;
@@ -55,24 +55,15 @@ window#waybar {
   background: rgba(255,255,255,0.6);
 }
 
-
 /* workspace buttons */
 #workspaces button {
   padding: 0 2px;
   margin: 0 2px;
   border-radius: 10px;
-  background: transparent;
-  color: rgba(255,255,255,0.40);
-}
-
-#workspaces button:hover {
-  background: rgba(255,255,255,0.15);
 }
 
 #workspaces button.active {
   background: rgba(255,255,255,0.35);
   color: black;
-  padding: 0 25px
-  
 }
 
