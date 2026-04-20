@@ -1,12 +1,28 @@
+import subprocess
 from collections.abc import Callable
 
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Output, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 mod = "mod4"
 terminal = guess_terminal()
+
+# TODO:
+# 1. Clipboard
+# 1.5 Bluetooth
+# 2. Bar
+# 3. picom
+# 4. tmux
+
+
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.Popen(["dunst"])
+    subprocess.Popen(["picom", "--config", "~/.config/picom/picom.conf"])
+    subprocess.Popen(["nm-applet"])
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -50,8 +66,6 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
@@ -67,7 +81,26 @@ keys = [
     ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
+    Key(
+        [mod],
+        "Tab",
+        lazy.spawn("rofi -show window"),
+        desc="Launch rofi window switcher",
+    ),
+    Key(
+        [],
+        "XF86AudioRaiseVolume",
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+    ),
+    Key(
+        [],
+        "XF86AudioLowerVolume",
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+    ),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -110,6 +143,7 @@ for i in groups:
         ]
     )
 
+# TODO: try other layouts and map a key to switch layouts
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     layout.Max(),
@@ -150,6 +184,7 @@ screens = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
+                # widget.Clipboard(),
                 widget.MemoryGraph(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.QuickExit(),
@@ -157,13 +192,13 @@ screens = [
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-            opacity=0,
-            background="#00000000",
+            # opacity=0,
+            background="#000000",
         ),
         background="#000000",
         wallpaper=wallpaper,
         wallpaper_mode="fill",
-        # # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
+        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
