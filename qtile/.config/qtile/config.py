@@ -1,3 +1,4 @@
+import os
 import subprocess
 from collections.abc import Callable
 
@@ -9,19 +10,49 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = guess_terminal()
 
+colors = {
+    "rosewater": "#f5e0dc",
+    "flamingo": "#f2cdcd",
+    "pink": "#f5c2e7",
+    "mauve": "#cba6f7",
+    "red": "#f38ba8",
+    "maroon": "#eba0ac",
+    "peach": "#fab387",
+    "yellow": "#f9e2af",
+    "green": "#a6e3a1",
+    "teal": "#94e2d5",
+    "sky": "#89dceb",
+    "sapphire": "#74c7ec",
+    "blue": "#89b4fa",
+    "lavender": "#b4befe",
+    "text": "#cdd6f4",
+    "subtext1": "#bac2de",
+    "subtext0": "#a6adc8",
+    "overlay2": "#9399b2",
+    "overlay1": "#7f849c",
+    "overlay0": "#6c7086",
+    "surface2": "#585b70",
+    "surface1": "#45475a",
+    "surface0": "#313244",
+    "base": "#1e1e2e",
+    "mantle": "#181825",
+    "crust": "#11111b",
+}
+
 # TODO:
-# 1. Clipboard
-# 1.5 Bluetooth
-# 2. Bar
-# 3. picom
+# 3. Bar
 # 4. tmux
 
 
 @hook.subscribe.startup_once
 def autostart():
     subprocess.Popen(["dunst"])
-    subprocess.Popen(["picom", "--config", "~/.config/picom/picom.conf"])
+    subprocess.Popen(
+        ["picom", "--config", os.path.expanduser("~/.config/picom/picom.conf")]
+    )
     subprocess.Popen(["nm-applet"])
+    subprocess.Popen(["blueman-applet"])
+    subprocess.Popen(["greenclip", "daemon"])
 
 
 keys = [
@@ -89,6 +120,22 @@ keys = [
         desc="Launch rofi window switcher",
     ),
     Key(
+        [mod],
+        "v",
+        lazy.spawn(
+            "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
+        ),
+        desc="Launch greenclip in rofi",
+    ),
+    Key(
+        [mod, "shift"],
+        "s",
+        lazy.spawn(
+            "bash -c 'maim -s ~/Pictures/screenshot-$(date +%s).png | xclip -selection clipboard -t image/png'"
+        ),
+        desc="Capture screenshot of a region",
+    ),
+    Key(
         [],
         "XF86AudioRaiseVolume",
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
@@ -145,7 +192,13 @@ for i in groups:
 
 # TODO: try other layouts and map a key to switch layouts
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Columns(
+        border_focus_stack=[colors["mauve"], colors["lavender"]],
+        border_focus=colors["blue"],
+        border_normal=colors["surface0"],
+        border_width=4,
+        margin=4,
+    ),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -161,9 +214,11 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
+    font="JetBrainsMono Nerd Font",
     fontsize=12,
     padding=3,
+    foreground=colors["text"],
+    background=colors["base"],
 )
 extension_defaults = widget_defaults.copy()
 
@@ -172,30 +227,67 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
+                widget.GroupBox(
+                    active=colors["text"],
+                    inactive=colors["overlay1"],
+                    this_current_screen_border=colors["mauve"],
+                    this_screen_border=colors["surface2"],
+                    other_current_screen_border=colors["blue"],
+                    other_screen_border=colors["surface1"],
+                    foreground=colors["text"],
+                    background=colors["base"],
+                    highlight_method="line",
+                    highlight_color=[colors["base"], colors["base"]],
+                    urgent_alert_method="block",
+                    urgent_border=colors["red"],
+                ),
+                widget.Prompt(
+                    foreground=colors["text"],
+                    background=colors["base"],
+                    cursor_color=colors["rosewater"],
+                ),
+                widget.WindowName(
+                    foreground=colors["subtext1"],
+                    background=colors["base"],
+                ),
                 widget.Chord(
                     chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
+                        "launch": (colors["base"], colors["red"]),
                     },
+                    foreground=colors["text"],
+                    background=colors["base"],
                     name_transform=lambda name: name.upper(),
                 ),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
-                widget.Systray(),
+                widget.Systray(background=colors["mantle"]),
                 # widget.Clipboard(),
-                widget.MemoryGraph(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
+                widget.MemoryGraph(
+                    foreground=colors["green"],
+                    border_color=colors["surface1"],
+                    graph_color=colors["green"],
+                    fill_color=colors["green"] + ".3",
+                    background=colors["base"],
+                ),
+                widget.Clock(
+                    format="%d %b %Y %a %I:%M %p",
+                    foreground=colors["text"],
+                    background=colors["base"],
+                ),
+                widget.QuickExit(
+                    default_text="",
+                    foreground=colors["red"],
+                    background=colors["base"],
+                ),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
             # opacity=0,
-            background="#000000",
+            background=colors["mantle"],
+            opacity=1.0,
         ),
-        background="#000000",
+        background=colors["base"],
         wallpaper=wallpaper,
         wallpaper_mode="fill",
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
