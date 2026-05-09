@@ -70,7 +70,11 @@ ZSH_THEME="gallifrey"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git timer zsh-autosuggestions zsh-syntax-highlighting)
+
+TIMER_PRECISION=2
+TIMER_THRESHOLD=0   # only show for commands taking > 1 second
+TIMER_FORMAT=$'\e[32m⏱ %d'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,4 +112,4 @@ alias hx="helix"
 alias start="sudo systemctl start"
 alias stop="sudo systemctl stop"
 alias sleep="systemctl suspend"
-alias mcp-test="npx modelcontextprotocl/inspector"
+alias mcp-test="npx modelcontextprotocol/inspector"
