@@ -347,7 +347,7 @@ hl.config({
     },
     -- https://wiki.hypr.land/Configuring/Variables/#animations
     animations = {
-        enabled = "yes, please :)",
+        enabled = false,
         -- Default curves, see https://wiki.hypr.land/Configuring/Animations/#curves
         --        NAME,           X0,   Y0,   X1,   Y1
         -- Default animations, see https://wiki.hypr.land/Configuring/Animations/
@@ -378,7 +378,7 @@ hl.config({
     -- layerrule = match:class waybar, blur on 
     -- See https://wiki.hypr.land/Configuring/Dwindle-Layout/ for more
     dwindle = {
-        pseudotile = true, -- Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+        -- pseudotile = true, -- Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true, -- You probably want this
     },
     -- See https://wiki.hypr.land/Configuring/Master-Layout/ for more
